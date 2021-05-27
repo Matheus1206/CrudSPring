@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head th:replace="~{base :: head('Paradas Confecções')}"></head>
+	<body>
+		<div class="container">
+			<div class="jumbotron jumbotron-fluid">
+			  <div class="container ">
+			    <h1 class="display-4 d-flex justify-content-center">Admin</h1>
+			    <p class="lead d-flex justify-content-center">Gerenciamento de clientes.</p>
+			  </div>
+			</div>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+			 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    			<span class="navbar-toggler-icon"></span>
+  			 </button>
+				<div class="navbar-nav collapse navbar-collapse" id="navbarTogglerDemo03">
+				<a class="nav-link" href="/">Todos os clientes</a>
+				<a class="nav-link" href="/premium">Premium</a>
+				<a class="nav-link" href="/basic">Basic</a>
+				</div>
+				<div>
+					<a href="/cliente/novo"><button class="btn btn-outline-secondary my-2 my-sm-0 mr-2 btn-sm">Novo Cliente</button></a>
+					</div>
+			</nav>
+			
+			<div>
+				<table class="table mt-2">
+					  <thead>
+					    <tr>
+					      <th scope="col">ID</th>
+					      <th scope="col">Nome</th>
+					      <th scope="col">CEP</th>
+					      <th scope="col">Status</th>
+					    </tr>
+					  </thead>
+					  <tbody th:each="cliente : ${lista}">
+					  	<tr>
+					  		<td th:text="${cliente.id}"></td>
+					  		<td th:text="${cliente.nome}"></td>
+					  		<td th:text="${cliente.cep}"></td>
+					  		<td th:text="${cliente.status.name()}"></td>
+					  		<td><a th:href="@{/cliente/editar?(id=${cliente.id})}">Editar</a></td>
+					  		<td><a th:href="@{/cliente/deletar?(id=${cliente.id})}">Deletar</a></td>
+					  	</tr>
+					  </tbody>
+				</table>
+			
+			
+			</div>
+			
+			
+			
+		</div>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	</body>
+</html>
