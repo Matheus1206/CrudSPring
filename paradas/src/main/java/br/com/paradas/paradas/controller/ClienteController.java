@@ -2,9 +2,12 @@ package br.com.paradas.paradas.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +24,16 @@ public class ClienteController {
 	private ClienteRepository repository;
 	
 	@GetMapping("novo")
-	public String getFormularioNovoCliente() {
+	public String getFormularioNovoCliente(Cliente cliente) {
 		return "cliente/formulario";
 	}
 	
 	@PostMapping("novo")
-	public String cadastrarNovoCliente(Cliente cliente) {
+	public String cadastrarNovoCliente(@Valid Cliente cliente, BindingResult result) {
+		if(result.hasErrors()) {
+			System.out.println("PAssou aqui");
+			return "cliente/formulario";
+		}
 		repository.save(cliente);
 		return "redirect:/home";
 	}

@@ -28,8 +28,10 @@ public class HomeController {
 	
 	@GetMapping("/{status}")
 	public String tipoCliente(@PathVariable("status") String status, Model model) {
-		List<Cliente> clientes = repository.findByStatus(Status.valueOf(status.toUpperCase()));
-		model.addAttribute("lista", clientes);
+		if (!status.equals("favicon.ico")) {
+			List<Cliente> clientes = repository.findByStatus(Status.valueOf(status.toUpperCase()));
+			model.addAttribute("lista", clientes);
+		}
 		return "home";
 	}
 	
